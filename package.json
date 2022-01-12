@@ -1,0 +1,20 @@
+{
+  "name": "wordle-ruin-the-fun",
+  "version": "1.0.0",
+  "description": "Bot hackathon for Wordle",
+  "main": "index.js",
+  "scripts": {
+    "test": "tap"
+  },
+  "keywords": [
+    "wordle"
+  ],
+  "author": "Jack",
+  "license": "MIT",
+  "dependencies": {
+    "wordlist-english": "^1.2.1"
+  },
+  "devDependencies": {
+    "tap": "^15.1.6"
+  }
+}
