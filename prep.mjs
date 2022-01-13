@@ -7,14 +7,21 @@ import { exit } from "process";
 
 function prepWords() {
   const frequencyCategories = [10, 20, 35, 40, 50, 55, 60, 70];
-  const words = frequencyCategories.map(getWordsByFrequencyCategory).reduce((prev, curr) => prev.concat(curr), []);
+  const words = frequencyCategories
+    .map(getWordsByFrequencyCategory)
+    .reduce((prev, curr) => prev.concat(curr), []);
 
   const histogram = makeHistogram(words);
   const result = {
     histogram,
     words,
   };
-  fs.mkdirSync("out");
+  try {
+    fs.mkdirSync("out");
+  } catch {
+    // it's coo
+  }
+
   fs.writeFile("out/insights.json", JSON.stringify(result), "utf8", (err) => {
     if (err) {
       console.error("Unable to write file");
@@ -35,6 +42,7 @@ function isEligibleWord(word) {
 function makeHistogram(words) {
   // // each word can contribute multiple counts for a letter e.g. 'smell' is 2 for 'l
   const characterToWordFrequency = {};
+  let totalCharacters = 5 * words.length;
   for (let i = 97; i < 123; i++) {
     characterToWordFrequency[String.fromCharCode(i)] = 0;
   }
@@ -53,7 +61,13 @@ function makeHistogram(words) {
     }
     return 0;
   });
-  return entries;
+
+  const histogram = entries.map(([character, totalCharacterCount]) => [
+    character,
+    totalCharacterCount / totalCharacters,
+  ]);
+
+  return histogram;
 }
 
 prepWords();

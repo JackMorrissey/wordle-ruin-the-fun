@@ -6,12 +6,16 @@ export class Game {
     this.remainingGuesses = 6;
     this.lost = false;
     this.won = false;
+    this.guesses = [];
+    this.responses = [];
   }
   guess(word) {
     if (this.lost || this.won) {
       return;
     }
+    this.guesses.push(word);
     const response = getResponse(word, this.answer);
+    this.responses.push(response);
 
     this.remainingGuesses--;
     if (response == "🟩🟩🟩🟩🟩") {
@@ -20,6 +24,12 @@ export class Game {
       this.lost = true;
     }
     return response;
+  }
+  print() {
+    const toLog = this.guesses.map((guess, i) => {
+      return { g: guess, r: this.responses[i] };
+    });
+    console.table(toLog);
   }
 }
 
