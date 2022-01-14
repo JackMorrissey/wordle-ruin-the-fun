@@ -18,16 +18,18 @@ export class Game {
     this.responses.push(response);
 
     this.remainingGuesses--;
-    if (response == "🟩🟩🟩🟩🟩") {
+    if (response.every((r) => r == "🟩")) {
       this.won = true;
+      this.over = true;
     } else if (!this.remainingGuesses) {
       this.lost = true;
+      this.over = true;
     }
     return response;
   }
   print() {
     const toLog = this.guesses.map((guess, i) => {
-      return { g: guess, r: this.responses[i] };
+      return { g: guess, r: this.responses[i].join("") };
     });
     console.table(toLog);
   }
@@ -64,5 +66,5 @@ export function getResponse(test, answer) {
       response[i] = "⬛";
     }
   }
-  return response.join("");
+  return response;
 }

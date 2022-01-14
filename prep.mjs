@@ -39,10 +39,10 @@ function isEligibleWord(word) {
   return word.length === 5 && /^[a-z]+$/.test(word);
 }
 
-function makeHistogram(words) {
+export function makeHistogram(words) {
   // // each word can contribute multiple counts for a letter e.g. 'smell' is 2 for 'l
   const characterToWordFrequency = {};
-  let totalCharacters = 5 * words.length;
+  let totalCharacters = words[0].length * words.length;
   for (let i = 97; i < 123; i++) {
     characterToWordFrequency[String.fromCharCode(i)] = 0;
   }
@@ -68,6 +68,14 @@ function makeHistogram(words) {
   ]);
 
   return histogram;
+}
+
+export function getNewAlphabetSet() {
+  const alphaset = new Set();
+  for (let i = 97; i < 123; i++) {
+    alphaset.add(String.fromCharCode(i));
+  }
+  return alphaset;
 }
 
 prepWords();
