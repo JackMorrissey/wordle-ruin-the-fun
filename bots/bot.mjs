@@ -1,11 +1,13 @@
-import { readFile } from "fs/promises";
+import { words } from "../words.mjs";
+import { makeHistogram } from "../prep.mjs";
 
 export default class Bot {
   async setup(game) {
     if (!this.insights) {
-      this.insights = JSON.parse(
-        await readFile(new URL("../out/insights.json", import.meta.url))
-      );
+      this.insights = {
+        words,
+        histogram: makeHistogram(words),
+      };
     }
     this.game = game;
   }

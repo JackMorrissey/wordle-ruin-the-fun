@@ -2,7 +2,7 @@ import tap from "tap";
 import { Archibald } from "../../bots/archibald.mjs";
 import { Game } from "../../play.mjs";
 
-const newGame = new Game("savor");
+const newGame = new Game("taste");
 const archibald = new Archibald();
 archibald.setup(newGame).then(() => {
   archibald.play();

@@ -22,7 +22,6 @@ export class Archibald extends Bot {
       guess = this.getBestWord(words, this.makeHistogramObject(words));
       this.game.guess(guess);
     }
-    this.game.print();
   }
 
   makeHistogramObject(words) {

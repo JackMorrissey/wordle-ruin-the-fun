@@ -11,9 +11,6 @@
   ],
   "author": "Jack",
   "license": "MIT",
-  "dependencies": {
-    "wordlist-english": "^1.2.1"
-  },
   "devDependencies": {
     "tap": "^15.1.6"
   }
